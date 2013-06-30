@@ -1,4 +1,5 @@
 RailsBank::Application.routes.draw do
+  mount CreditCardService => '/'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
