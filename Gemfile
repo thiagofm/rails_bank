@@ -22,11 +22,11 @@ end
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'database_cleaner'
 end
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
 end
 
 gem 'jquery-rails'
