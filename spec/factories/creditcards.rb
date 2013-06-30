@@ -3,7 +3,7 @@ FactoryGirl.define do
     cvv '000'
     number '00000000000001'
     name 'Howard Roark'
-    outstanding_balance 0.0
-    available_balance 0.0
+    outstanding_balance 10000.0
+    available_balance 10000.0
   end
 end
