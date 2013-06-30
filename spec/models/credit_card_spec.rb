@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CreditCard do
-  context 'transfer' do
+  context '#transfer' do
     it "should send funds to somebody" do
       pending
     end
