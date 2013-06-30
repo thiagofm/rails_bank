@@ -1,3 +1,5 @@
 class Transaction < ActiveRecord::Base
-  attr_accessible :credit_card_id, :store_code, :value
+  attr_accessible :store_code, :value
+
+  has_one :credit_card
 end
