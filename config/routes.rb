@@ -1,6 +1,7 @@
 RailsBank::Application.routes.draw do
-  resources :creditcards
-  resources :transactions
+  resources :creditcards do
+    resources :transactions
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
