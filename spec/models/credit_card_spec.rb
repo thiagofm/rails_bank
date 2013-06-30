@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe CreditCard do
   context '#transfer' do
+    before(:each) do
+      @cc = FactoryGirl.create(:credit_card)
+    end
+
     it "should send funds to somebody" do
+      p @cc
       pending
     end
 

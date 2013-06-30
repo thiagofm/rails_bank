@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130630160137) do
+ActiveRecord::Schema.define(:version => 20130630210315) do
 
   create_table "credit_cards", :force => true do |t|
     t.string   "name"
@@ -24,5 +24,15 @@ ActiveRecord::Schema.define(:version => 20130630160137) do
   end
 
   add_index "credit_cards", ["number"], :name => "index_credit_cards_on_number", :unique => true
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "credit_card_id"
+    t.decimal  "value"
+    t.string   "store_code"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "transactions", ["credit_card_id"], :name => "index_transactions_on_credit_card_id", :unique => true
 
 end
