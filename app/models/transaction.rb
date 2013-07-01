@@ -24,6 +24,7 @@ class Transaction < ActiveRecord::Base
       credit_card = self.credit_card
 
       # Charge backs the credit card
+      # TODO: extract method here
       credit_card.outstanding_balance -= self.value
       credit_card.available_balance += self.value
       credit_card.save
