@@ -1,7 +1,10 @@
 RailsBank::Application.routes.draw do
-  resources :creditcards do
-    resources :transactions
+  scope 'api', as: :api do
+    resources :credit_cards do
+      resources :transactions
+    end
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
