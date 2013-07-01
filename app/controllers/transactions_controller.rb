@@ -27,9 +27,7 @@ class TransactionsController < ApplicationController
 
     render nothing: true, status: 404 and return if @transaction.nil?
 
-    @transaction.value = params[:value]
-
-    if @transaction.save
+    if @transaction.redo(params[:value])
       render nothing: true, status: 204
     else
       render json: @transaction.errors.to_json, status: 400
