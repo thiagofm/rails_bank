@@ -15,9 +15,20 @@ class Creditcard
   end
 
   def self.find_by_number creditcard_number
+    json_response = ::RestClient.get("#{Services['creditcard']}/creditcard/#{creditcard_number}")
+    hash_response = JSON.parse(json_response)
+
+    # This is a good way to thread responses as it's generic enought
+    # to not rely even on response status codes(or rely on then when you know it's there)
+    if hash_response.present?
+      return Creditcard.build_from_hash hash_response
+    else
+      # active record's default
+      return nil
+    end
   end
 
-  def self.create creditcard
+  def self.create creditcard_hash
   end
 
   def self.send_funds creditcard_number, amount

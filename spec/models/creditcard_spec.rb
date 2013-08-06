@@ -25,12 +25,20 @@ describe Creditcard do
 
   # Tagged as remote because it needs the avaiability of another service
   context '#find_by_number', remote: true do
-    pending
+    it "should find it when it exists" do
+      Creditcard.find_by_number('0000000000').should be_an_instance_of Creditcard
+    end
+
+    it "shouldn't find it when it doesn't exist" do
+      Creditcard.find_by_number('1000900000').should be nil
+    end
   end
 
   # Tagged as remote because it needs the avaiability of another service
   context '#create', remote: true do
-    pending
+    it "should create a creditcard" do
+      pending
+    end
   end
 
    # Tagged as remote because it needs the avaiability of another service
