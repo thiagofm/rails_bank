@@ -2,16 +2,16 @@ class TransactionsController < ApplicationController
   # POST /api/transactions
   # params: store_code, value, credit_card_id
   def create
-    @credit_card = CreditCard.find_by_number(params[:credit_card_id])
+    #@credit_card = CreditCard.find_by_number(params[:credit_card_id])
     
-    render nothing: true, status: 404 and return if @credit_card.nil?
+    #render nothing: true, status: 404 and return if @credit_card.nil?
 
     @transaction = Transaction.new(
       store_code: params[:store_code],
       value: params[:value]
     )
 
-    @transaction.credit_card = @credit_card
+    #@transaction.credit_card = @credit_card
 
     if @transaction.transact
       render json: @transaction, status: 201

@@ -1,19 +1,17 @@
 class Transaction < ActiveRecord::Base
-  attr_accessible :store_code, :value
+  attr_accessible :store_code, :value, :credit_card_number
 
   validates :store_code, presence: true
   validates :value, presence: true
 
-  belongs_to :credit_card
-
   def transact
     ActiveRecord::Base.transaction do
       # Updating credit card to see if there's enough balance to do it
-      credit_card = self.credit_card
+      #credit_card = self.credit_card
 
-      credit_card.outstanding_balance += self.value
-      credit_card.available_balance -= self.value
-      credit_card.save
+      #credit_card.outstanding_balance += self.value
+      #credit_card.available_balance -= self.value
+      #credit_card.save
 
       self.save
     end
@@ -21,18 +19,18 @@ class Transaction < ActiveRecord::Base
 
   def redo new_value
     ActiveRecord::Base.transaction do
-      credit_card = self.credit_card
+      #credit_card = self.credit_card
 
-      # Charge backs the credit card
-      # TODO: extract method here
-      credit_card.outstanding_balance -= self.value
-      credit_card.available_balance += self.value
-      credit_card.save
+      ## Charge backs the credit card
+      ## TODO: extract method here
+      #credit_card.outstanding_balance -= self.value
+      #credit_card.available_balance += self.value
+      #credit_card.save
 
-      # Uses the new value
-      credit_card.outstanding_balance += new_value.to_f
-      credit_card.available_balance -= new_value.to_f
-      credit_card.save
+      ## Uses the new value
+      #credit_card.outstanding_balance += new_value.to_f
+      #credit_card.available_balance -= new_value.to_f
+      #credit_card.save
 
       self.value = new_value
       self.save
