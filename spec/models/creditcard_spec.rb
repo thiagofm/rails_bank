@@ -43,11 +43,22 @@ describe Creditcard do
 
    # Tagged as remote because it needs the avaiability of another service
   context '#send_funds', remote: true do
-    pending
+    it "should send funds" do
+      # I don't recomment integration tests with API
+      # behave that way, it should TRUST the service(just checking the response code or something
+      # but I did it anyways just to comment on it for the code review.
+      current_aa = Creditcard.find_by_number('0000000000').available_balance
+
+      Creditcard.send_funds('0000000000', 10)
+
+      Creditcard.find_by_number('0000000000').available_balance.should == (current_aa + 10)
+    end
   end
 
    # Tagged as remote because it needs the avaiability of another service
   context '#receive_funds', remote: true do
-    pending
+    it "should send funds" do
+      Creditcard.send_funds('0000000000', 10).should be true
+    end
   end
 end

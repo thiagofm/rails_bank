@@ -29,11 +29,13 @@ class Creditcard
     end
   end
 
+  # I ask myself if this should exist as this method isn't used here...
   def self.create creditcard_hash
     # I had to use typhoeus here because pedestal.io(what I used in clojure as web framework)
     # can't really deal with body parameters as I wanted so I'm instead sending
     # it as a query string and RestClient by default sends POST requests in the body(as it should...)
     json_response = ::Typhoeus.post("#{Services['creditcard']}/creditcard", params: creditcard_hash)
+
     # There isn't really a validation in the clojure side
     # that doesn't save a wrong record... but let's make it look
     # like so :D
@@ -48,8 +50,22 @@ class Creditcard
   end
 
   def self.send_funds creditcard_number, amount
+    json_response = ::Typhoeus.put("#{Services['creditcard']}/creditcard/#{creditcard_number}/send", params: {amount: amount})
+
+    if json_response.code == 204
+      true
+    else
+      false
+    end
   end
 
   def self.receive_funds creditcard_number, amount
+    json_response = ::Typhoeus.put("#{Services['creditcard']}/creditcard/#{creditcard_number}/receive", params: {amount: amount})
+
+    if json_response.code == 204
+      true
+    else
+      false
+    end
   end
 end
