@@ -40,8 +40,6 @@ class Creditcard
     # that doesn't save a wrong record... but let's make it look
     # like so :D
     
-    # PS: for some reason, it isn't creating in the clj side =(
-    # It was working before, will have to debug it further to fix it...
     if json_response.code == 201
       true
     else

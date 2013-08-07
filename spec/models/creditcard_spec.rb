@@ -6,8 +6,8 @@ describe Creditcard do
       'name' => 'Thiago Fernandes Massa',
       'number' => '1337',
       'cvv' => '101',
-      'outstanding_balance' => '100',
-      'available_balance' => '100'
+      'outstanding_balance' => '100.0',
+      'available_balance' => '100.0'
     }
   end
 
