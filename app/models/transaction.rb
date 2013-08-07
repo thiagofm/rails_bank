@@ -6,31 +6,21 @@ class Transaction < ActiveRecord::Base
 
   def transact
     ActiveRecord::Base.transaction do
-      # Updating credit card to see if there's enough balance to do it
-      #credit_card = self.credit_card
+      # Raising the exception will stop the tx if the creditcard has any problem with sending funds
+      raise Exception unless Creditcard.send_funds(self.credit_card_number, self.value)
 
-      #credit_card.outstanding_balance += self.value
-      #credit_card.available_balance -= self.value
-      #credit_card.save
-
+      self.value = value
       self.save
     end
   end
 
   def redo new_value
     ActiveRecord::Base.transaction do
-      #credit_card = self.credit_card
+      # Refunds
+      raise Exception unless Creditcard.receive_funds(self.credit_card_number, self.value)
 
-      ## Charge backs the credit card
-      ## TODO: extract method here
-      #credit_card.outstanding_balance -= self.value
-      #credit_card.available_balance += self.value
-      #credit_card.save
-
-      ## Uses the new value
-      #credit_card.outstanding_balance += new_value.to_f
-      #credit_card.available_balance -= new_value.to_f
-      #credit_card.save
+      # Debts the new value
+      raise Exception unless Creditcard.send_funds(self.credit_card_number, new_value)
 
       self.value = new_value
       self.save
