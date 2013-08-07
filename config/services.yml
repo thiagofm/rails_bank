@@ -1,2 +1,4 @@
 development:
   creditcard: localhost:8080
+test:
+  creditcard: localhost:8080
