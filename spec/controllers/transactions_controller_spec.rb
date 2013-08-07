@@ -8,7 +8,7 @@ describe TransactionsController do
     end
   end
 
-  context '#update', wip: true do
+  context '#update' do
     it "should edit a transaction with a new value" do
       transaction = FactoryGirl.create(:transaction)
       put :update, id: transaction.id, value: 1
