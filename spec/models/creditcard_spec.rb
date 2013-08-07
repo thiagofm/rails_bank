@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Creditcard do
-  let(:credicard_fixture) do
+  let(:creditcard_fixture) do
     {
       'name' => 'Thiago Fernandes Massa',
       'number' => '1337',
@@ -12,7 +12,7 @@ describe Creditcard do
   end
 
   context '#build_from_json' do
-    let(:cc) { Creditcard.build_from_hash(credicard_fixture) }
+    let(:cc) { Creditcard.build_from_hash(creditcard_fixture) }
 
     it "should be buildable with the correct types" do
       cc.name.should be_an_instance_of String
@@ -37,7 +37,7 @@ describe Creditcard do
   # Tagged as remote because it needs the avaiability of another service
   context '#create', remote: true do
     it "should create a creditcard" do
-      pending
+      Creditcard.create(creditcard_fixture).should be true
     end
   end
 
