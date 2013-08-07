@@ -51,7 +51,7 @@ describe Creditcard do
 
       Creditcard.send_funds('0000000000', 10)
 
-      Creditcard.find_by_number('0000000000').available_balance.should == (current_aa + 10)
+      Creditcard.find_by_number('0000000000').available_balance.should == (current_aa - 10)
     end
   end
 
